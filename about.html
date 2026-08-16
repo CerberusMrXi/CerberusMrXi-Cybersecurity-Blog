@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; connect-src 'self' http://localhost:3001 http://127.0.0.1:3001 https:; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com;">
+  <meta name="description" content="About Sudeepa Wanigarathna — Ethical Hacker, Exploit Developer, CTF Player, and Security Researcher from Sri Lanka." />
+  <meta name="keywords" content="Sudeepa Wanigarathna, ethical hacker, Sri Lanka, security researcher, exploit developer" />
+  <meta name="author" content="Sudeepa Wanigarathna" />
+  <title>About — Sudeepa Wanigarathna</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/blog.css" />
+</head>
+<body>
+
+<nav class="nav" id="main-nav" aria-label="Main navigation">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="CerberusMrXi home">
+      <span class="nav__logo-icon">CX</span>
+      <span>Cerberus<span>MrXi</span></span>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html" class="nav__link">Blog</a></li>
+      <li><a href="ctf.html" class="nav__link">CTF</a></li>
+      <li><a href="about.html" class="nav__link nav__link--active">About</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a href="mailto:security@serendibware.com" class="btn btn--secondary btn--sm">Contact</a>
+    </div>
+    <button class="nav__hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav__mobile" id="nav-mobile">
+  <a href="index.html" class="nav__link">Blog</a>
+  <a href="ctf.html" class="nav__link">CTF</a>
+  <a href="about.html" class="nav__link">About</a>
+</div>
+
+<!-- ── About Page ───────────────────────────────────────────── -->
+<main class="about-page" id="main-content">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Sidebar -->
+      <aside class="about-sidebar" aria-label="Profile information">
+        <div class="about-avatar" aria-hidden="true">CX</div>
+
+        <h1 class="about-name">Sudeepa Wanigarathna</h1>
+        <p class="about-handle">@CerberusMrXi</p>
+
+        <!-- Status indicator -->
+        <div style="text-align:center;margin-bottom:20px">
+          <span style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-green);padding:6px 14px;border:1px solid rgba(0,255,136,0.2);border-radius:99px;background:rgba(0,255,136,0.05)">
+            <span style="width:7px;height:7px;background:var(--accent-green);border-radius:50%;box-shadow:0 0 8px var(--accent-green);animation:pulse 2s ease-in-out infinite"></span>
+            Open to collaborate
+          </span>
+        </div>
+
+        <!-- Social links -->
+        <div class="about-social" aria-label="Social media links">
+          <a href="https://github.com/CerberusMrXi" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">GH</a>
+          <a href="https://x.com/SudeepaWanigar1"          target="_blank" rel="noopener noreferrer" aria-label="Twitter" title="Twitter">TW</a>
+          <a href="https://lk.linkedin.com/in/sudeepa-wanigarathna09"                     target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">LI</a>
+          <a href="https://tryhackme.com/p/CerberusMrXi" target="_blank" rel="noopener noreferrer" aria-label="TryHackMe" title="TryHackMe">THM</a>
+        </div>
+
+        <!-- Quick info card -->
+        <div class="card" style="margin-bottom:20px">
+          <div style="display:grid;gap:10px;font-size:0.85rem">
+            <div style="display:flex;gap:10px;align-items:center">
+              <span style="font-size:1.1rem">📍</span>
+              <span style="color:var(--text-secondary)">Sri Lanka</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <span style="font-size:1.1rem">💼</span>
+              <span style="color:var(--text-secondary)">CEO &amp; Founder, Serendibware</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <span style="font-size:1.1rem">🎓</span>
+              <span style="color:var(--text-secondary)">Undergraduate (Software Eng. &amp; Cybersec)</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <span style="font-size:1.1rem">🏫</span>
+              <span style="color:var(--text-secondary)">NIBM Sri Lanka</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <span style="font-size:1.1rem">📧</span>
+              <a href="mailto:security@serendibware.com" style="color:var(--accent-cyan);font-size:0.82rem">security@serendibware.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Projects & Focus -->
+        <div class="card" style="margin-bottom:20px">
+          <p style="font-family:var(--font-mono);font-size:0.75rem;color:var(--accent-green);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px">⚔️ Research & Projects</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--bg-tertiary);border-radius:var(--radius-md)">
+              <span>📶</span>
+              <div>
+                <div style="font-weight:700;font-size:0.85rem">Cerberus Blue</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);font-family:var(--font-mono)">Bluetooth Penetration Testing</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--bg-tertiary);border-radius:var(--radius-md)">
+              <span>⚡</span>
+              <div>
+                <div style="font-weight:700;font-size:0.85rem">React2Shell Scanner</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);font-family:var(--font-mono)">Next.js Server Components RCE</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--bg-tertiary);border-radius:var(--radius-md)">
+              <span>🔒</span>
+              <div>
+                <div style="font-weight:700;font-size:0.85rem">Cerberus Stegano</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);font-family:var(--font-mono)">LSB &amp; AES-256 MP4 Hiding</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--bg-tertiary);border-radius:var(--radius-md)">
+              <span>🐞</span>
+              <div>
+                <div style="font-weight:700;font-size:0.85rem">CVE PoC Research</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);font-family:var(--font-mono)">Responsible Disclosures &amp; PoCs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="index.html" class="btn btn--primary" style="width:100%;justify-content:center">Read the blog</a>
+      </aside>
+
+      <!-- Main Content -->
+      <div>
+        <!-- About me -->
+        <section style="margin-bottom:56px" aria-labelledby="about-heading">
+          <h2 id="about-heading" class="section-title" style="margin-bottom:24px">About Me</h2>
+
+          <div class="terminal" style="margin-bottom:28px" aria-label="Terminal introduction">
+            <div class="terminal__bar">
+              <span class="terminal__dot terminal__dot--red"></span>
+              <span class="terminal__dot terminal__dot--yellow"></span>
+              <span class="terminal__dot terminal__dot--green"></span>
+              <span class="terminal__title">about.txt</span>
+            </div>
+            <div class="terminal__body">
+              <p><span class="terminal__prompt">$ </span><span class="terminal__cmd">cat bio.txt</span></p>
+              <br>
+              <p class="terminal__output" style="color:var(--text-primary)">
+                Hey! I'm <strong style="color:var(--accent-green)">Sudeepa Wanigarathna</strong> (aka <strong style="color:var(--accent-green)">CerberusMrXi</strong>).
+                I am the CEO &amp; Founder of Serendibware, a security researcher, exploit developer, and Software Engineering &amp; Cybersecurity undergraduate at NIBM Sri Lanka.
+              </p>
+              <br>
+              <p class="terminal__output">
+                I direct operations at Serendibware while contributing to public offensive security research,
+                disclosing vulnerability PoCs, and designing modular security frameworks (such as Cerberus Blue).
+              </p>
+              <br>
+              <p class="terminal__output" style="color:var(--accent-cyan)">
+                "Understanding the exploit is the key to building the defense."
+              </p>
+            </div>
+          </div>
+
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:16px">
+            My path in offensive security is driven by low-level code review and exploit automation. I research newly disclosed CVEs and create public exploit PoCs to assist defense teams. Some of my notable exploit research includes:
+          </p>
+          <ul style="list-style:none;margin-bottom:24px;padding-left:10px">
+            <li style="margin-bottom:8px;color:var(--text-secondary)"><strong style="color:var(--accent-green)">CVE-2025-55182</strong>: Next.js / React Server Components RCE Scanner (React2Shell).</li>
+            <li style="margin-bottom:8px;color:var(--text-secondary)"><strong style="color:var(--accent-green)">CVE-2026-48909</strong>: Joomla SP LMS SP Object Injection leading to RCE.</li>
+            <li style="margin-bottom:8px;color:var(--text-secondary)"><strong style="color:var(--accent-green)">CVE-2023-44487</strong>: HTTP/2 Rapid Reset PoC Exploit.</li>
+            <li style="margin-bottom:8px;color:var(--text-secondary)"><strong style="color:var(--accent-green)">CVE-2026-33017</strong>: Langflow Code Injection RCE tool.</li>
+            <li style="margin-bottom:8px;color:var(--text-secondary)"><strong style="color:var(--accent-green)">CVE-2026-23744</strong>: MCPJam Inspector RCE.</li>
+          </ul>
+          <p style="color:var(--text-secondary);line-height:1.8">
+            All research, code PoCs, and toolsets shared on my GitHub and this blog are meant strictly for educational analysis, authorized red team assessments, and remediation planning.
+          </p>
+        </section>
+
+        <!-- Skills -->
+        <section style="margin-bottom:56px" aria-labelledby="skills-heading">
+          <h2 id="skills-heading" class="section-title" style="margin-bottom:28px">Skills & Expertise</h2>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px" class="skills-grid">
+            <div>
+              <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--accent-green);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px">Offensive Security</p>
+              <div class="skill-bar">
+                <div class="skill-bar__header"><span>Binary Exploitation</span><span>90%</span></div>
+                <div class="skill-bar__track"><div class="skill-bar__fill" style="width:90%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar__header"><span>Web App Pentesting</span><span>88%</span></div>
+                <div class="skill-bar__track"><div class="skill-bar__fill" style="width:88%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar__header"><span>Reverse Engineering</span><span>82%</span></div>
+                <div class="skill-bar__track"><div class="skill-bar__fill" style="width:82%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar__header"><span>Network Pentesting</span><span>78%</span></div>
+                <div class="skill-bar__track"><div class="skill-bar__fill" style="width:78%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar__header"><span>Malware Analysis</span><span>75%</span></div>
+                <div class="skill-bar__track"><div class="skill-bar__fill" style="width:75%"></div></div>
+              </div>
+            </div>
+
+            <div>
+              <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px">Programming</p>
+              <div class="skill-bar">
+                <div class="skill-bar__header"><span>Python</span><span>95%</span></div>
+                <div class="skill-bar__track"><div class="skill-bar__fill" style="width:95%;background:linear-gradient(90deg,var(--accent-cyan),var(--accent-green))"></div></div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar__header"><span>C / C++</span><span>85%</span></div>
+                <div class="skill-bar__track"><div class="skill-bar__fill" style="width:85%;background:linear-gradient(90deg,var(--accent-cyan),var(--accent-green))"></div></div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar__header"><span>Assembly (x86/x64)</span><span>80%</span></div>
+                <div class="skill-bar__track"><div class="skill-bar__fill" style="width:80%;background:linear-gradient(90deg,var(--accent-cyan),var(--accent-green))"></div></div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar__header"><span>Go</span><span>72%</span></div>
+                <div class="skill-bar__track"><div class="skill-bar__fill" style="width:72%;background:linear-gradient(90deg,var(--accent-cyan),var(--accent-green))"></div></div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar__header"><span>Bash / Shell</span><span>90%</span></div>
+                <div class="skill-bar__track"><div class="skill-bar__fill" style="width:90%;background:linear-gradient(90deg,var(--accent-cyan),var(--accent-green))"></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tools -->
+        <section style="margin-bottom:56px" aria-labelledby="tools-heading">
+          <h2 id="tools-heading" class="section-title" style="margin-bottom:24px">Tools & Arsenal</h2>
+          <div class="tool-grid">
+            <span class="tool-pill">Metasploit</span>
+            <span class="tool-pill">Burp Suite</span>
+            <span class="tool-pill">Nmap</span>
+            <span class="tool-pill">GDB / PEDA</span>
+            <span class="tool-pill">pwntools</span>
+            <span class="tool-pill">Ghidra</span>
+            <span class="tool-pill">IDA Pro</span>
+            <span class="tool-pill">Wireshark</span>
+            <span class="tool-pill">John the Ripper</span>
+            <span class="tool-pill">Hashcat</span>
+            <span class="tool-pill">sqlmap</span>
+            <span class="tool-pill">Nikto</span>
+            <span class="tool-pill">Gobuster</span>
+            <span class="tool-pill">ffuf</span>
+            <span class="tool-pill">Hydra</span>
+            <span class="tool-pill">BloodHound</span>
+            <span class="tool-pill">Impacket</span>
+            <span class="tool-pill">CrackMapExec</span>
+            <span class="tool-pill">Nessus</span>
+            <span class="tool-pill">OpenVAS</span>
+            <span class="tool-pill">Volatility</span>
+            <span class="tool-pill">Autopsy</span>
+            <span class="tool-pill">angr</span>
+            <span class="tool-pill">ROPgadget</span>
+            <span class="tool-pill">radare2</span>
+            <span class="tool-pill">Nuclei</span>
+          </div>
+        </section>
+
+        <!-- Experience Timeline -->
+        <section style="margin-bottom:56px" aria-labelledby="exp-heading">
+          <h2 id="exp-heading" class="section-title" style="margin-bottom:28px">Experience</h2>
+          <div class="timeline" aria-label="Career timeline">
+            <div class="timeline-item">
+              <p class="timeline-date">2024 — Present</p>
+              <h3 class="timeline-title">CEO &amp; Founder / Lead Researcher</h3>
+              <p class="timeline-org">Serendibware</p>
+              <p class="timeline-desc">Overseeing operations, security tool development (such as Cerberus Blue, React2Shell scanner), and vulnerability research. Driving corporate strategy, red team consulting, and open-source tooling contributions.</p>
+            </div>
+            <div class="timeline-item">
+              <p class="timeline-date">2023 — Present</p>
+              <h3 class="timeline-title">Software Engineering &amp; Cybersecurity Undergraduate</h3>
+              <p class="timeline-org">NIBM Sri Lanka</p>
+              <p class="timeline-desc">Acquiring foundational training in software architecture, routing models, secure development lifecycle, cryptography, and network defenses.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section aria-labelledby="contact-heading">
+          <h2 id="contact-heading" class="section-title" style="margin-bottom:20px">Get In Touch</h2>
+          <div class="card" style="background:linear-gradient(135deg,rgba(0,255,136,0.05),rgba(0,212,255,0.05));border-color:var(--border-glow)">
+            <p style="color:var(--text-secondary);margin-bottom:20px;font-size:1rem">
+              Interested in collaboration, bug bounty tips, or just want to talk security? Feel free to reach out!
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <a href="mailto:security@serendibware.com" class="btn btn--primary">Email</a>
+              <a href="https://x.com/SudeepaWanigar1" class="btn btn--secondary" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ── Footer ───────────────────────────────────────────────── -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__bottom" style="padding-top:0;border-top:none">
+      <p class="footer__copy">© 2024 <span>Sudeepa Wanigarathna</span> · 🇱🇰 Sri Lanka · <span style="color:var(--accent-green)">Hack The Planet</span></p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initSkillBars();
+  });
+</script>
+
+<style>
+  @media (max-width: 768px) {
+    .skills-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
+</body>
+</html>

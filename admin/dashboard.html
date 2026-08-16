@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; connect-src 'self' http://localhost:3001 http://127.0.0.1:3001 https:; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com;">
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Dashboard — Admin · CerberusMrXi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- EasyMDE (Markdown Editor) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/admin.css" />
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- ── Sidebar ────────────────────────────────────────────── -->
+  <aside class="admin-sidebar" id="admin-sidebar" aria-label="Admin navigation">
+    <div class="sidebar__header">
+      <div class="sidebar__logo-icon" aria-hidden="true">CX</div>
+      <div>
+        <div class="sidebar__logo-text">CerberusMrXi</div>
+        <div class="sidebar__logo-sub">Admin Panel</div>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav" aria-label="Admin sections">
+      <p class="sidebar__section-label">Overview</p>
+
+      <button class="sidebar__item active" data-view="dashboard" id="nav-dashboard" aria-label="Dashboard">
+        <span class="sidebar__item-icon">📊</span>
+        Dashboard
+      </button>
+
+      <p class="sidebar__section-label">Content</p>
+
+      <button class="sidebar__item" data-view="posts" id="nav-posts" aria-label="All Posts">
+        <span class="sidebar__item-icon">📝</span>
+        All Posts
+        <span class="sidebar__item-badge" id="posts-badge">0</span>
+      </button>
+
+      <button class="sidebar__item" data-view="new-post" id="nav-new-post" aria-label="New Post">
+        <span class="sidebar__item-icon">✏️</span>
+        New Post
+      </button>
+
+      <p class="sidebar__section-label">System</p>
+
+      <button class="sidebar__item" data-view="connections" id="nav-connections" aria-label="Connections dashboard">
+        <span class="sidebar__item-icon">🔌</span>
+        Connections
+        <span class="sidebar__item-badge conn-sidebar-badge" id="conn-sidebar-badge">—</span>
+      </button>
+
+      <button class="sidebar__item" data-view="settings" id="nav-settings" aria-label="Settings and Backup">
+        <span class="sidebar__item-icon">⚙️</span>
+        Settings & Backup
+      </button>
+
+      <a href="../index.html" class="sidebar__item" target="_blank" rel="noopener noreferrer" style="text-decoration:none" aria-label="View Blog">
+        <span class="sidebar__item-icon">🌐</span>
+        View Blog
+      </a>
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="sidebar__user" aria-label="User info">
+        <div class="sidebar__user-avatar" aria-hidden="true">SW</div>
+        <div>
+          <div class="sidebar__user-name">Sudeepa</div>
+          <div class="sidebar__user-role">Administrator</div>
+        </div>
+        <button class="sidebar__logout" id="logout-btn" title="Logout" aria-label="Logout">⏻</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ───────────────────────────────────────── -->
+  <div class="admin-main" id="admin-main">
+
+    <!-- Top Bar -->
+    <header class="admin-topbar" role="banner">
+      <div class="admin-topbar__left">
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">☰</button>
+        <h1 class="admin-topbar__title" id="topbar-title">📊 Dashboard</h1>
+      </div>
+      <div class="admin-topbar__right">
+        <button class="topbar-btn" id="btn-new-post" aria-label="Create new post">✏️ New Post</button>
+        <a href="../index.html" class="topbar-btn" target="_blank" rel="noopener noreferrer" aria-label="View live blog">🌐 Live Blog</a>
+        <button class="topbar-btn" id="topbar-logout" style="color:var(--accent-red);border-color:rgba(255,71,87,0.2)" aria-label="Logout">⏻ Logout</button>
+      </div>
+    </header>
+
+    <!-- ── Content Area ─────────────────────────────────────── -->
+    <main class="admin-content" id="admin-content" role="main">
+
+      <!-- ── Dashboard Panel ──────────────────────────────── -->
+      <section class="admin-panel active" id="panel-dashboard" aria-label="Dashboard overview">
+
+        <div style="margin-bottom:28px">
+          <h2 style="font-size:1.3rem;font-weight:800">Welcome back, Sudeepa 👋</h2>
+          <p style="color:var(--text-secondary);font-size:0.9rem;margin-top:4px;font-family:var(--font-mono)" id="dash-datetime"></p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid" aria-label="Statistics">
+          <div class="stat-card">
+            <div class="stat-card__icon">📝</div>
+            <div class="stat-card__value" id="dash-total">0</div>
+            <div class="stat-card__label">Total Posts</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon">✅</div>
+            <div class="stat-card__value" id="dash-published">0</div>
+            <div class="stat-card__label">Published</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon">📋</div>
+            <div class="stat-card__value" id="dash-drafts">0</div>
+            <div class="stat-card__label">Drafts</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon">🏴</div>
+            <div class="stat-card__value" id="dash-ctfs">0</div>
+            <div class="stat-card__label">CTF Writeups</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon">👁</div>
+            <div class="stat-card__value" id="dash-views">0</div>
+            <div class="stat-card__label">Total Views</div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div style="display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap">
+          <button class="btn btn--primary" id="btn-new-post-2" aria-label="Write new post">✏️ Write New Post</button>
+          <button class="btn btn--secondary" onclick="switchView('posts')" aria-label="Manage posts">📝 Manage Posts</button>
+          <button class="btn btn--secondary" onclick="switchView('settings')" aria-label="Backup data">💾 Backup Data</button>
+        </div>
+
+        <!-- Recent Posts Table -->
+        <div>
+          <div class="table-header">
+            <h3 style="font-size:1rem;font-weight:700">Recent Posts</h3>
+            <button class="btn btn--secondary btn--sm" onclick="switchView('posts')">View All →</button>
+          </div>
+          <div style="overflow-x:auto;border-radius:var(--radius-lg)">
+            <table class="data-table" aria-label="Recent posts">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="recent-tbody">
+                <tr><td colspan="5" style="text-align:center;padding:30px;color:var(--text-muted)">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── All Posts Panel ───────────────────────────────── -->
+      <section class="admin-panel" id="panel-posts" aria-label="All posts management">
+
+        <div class="table-header">
+          <h2 style="font-size:1.1rem;font-weight:800">All Posts</h2>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <div class="table-search">
+              <span class="table-search__icon" aria-hidden="true">🔍</span>
+              <input type="search" id="table-search" class="table-search__input"
+                     placeholder="Search posts…" aria-label="Search posts" />
+            </div>
+            <button class="btn btn--primary btn--sm" onclick="editingPostId=null;switchView('new-post')" aria-label="New post">✏️ New Post</button>
+          </div>
+        </div>
+
+        <div style="overflow-x:auto;border-radius:var(--radius-lg)">
+          <table class="data-table" aria-label="Posts table">
+            <thead>
+              <tr>
+                <th data-sort="title">Title</th>
+                <th data-sort="type">Type</th>
+                <th data-sort="status">Status</th>
+                <th data-sort="date">Date</th>
+                <th data-sort="views">Views</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="posts-tbody">
+              <tr><td colspan="6" style="text-align:center;padding:30px;color:var(--text-muted)">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="posts-pagination" aria-label="Pagination"></div>
+      </section>
+
+      <!-- ── New / Edit Post Panel ─────────────────────────── -->
+      <section class="admin-panel" id="panel-new-post" aria-label="Post editor">
+
+        <div class="editor-layout">
+
+          <!-- Main Editor -->
+          <div class="editor-main">
+            <!-- Title -->
+            <input type="text" id="editor-title" class="editor-title"
+                   placeholder="Post Title…" maxlength="200"
+                   aria-label="Post title" />
+
+            <!-- Excerpt -->
+            <textarea id="editor-excerpt" class="editor-excerpt"
+                      placeholder="Brief excerpt / description (shown in post cards)…"
+                      maxlength="400" rows="3" aria-label="Post excerpt"></textarea>
+
+            <!-- Markdown Editor -->
+            <textarea id="editor-content" aria-label="Post content (Markdown)"></textarea>
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="editor-sidebar" aria-label="Post settings">
+
+            <!-- Publish -->
+            <div class="editor-panel">
+              <p class="editor-panel__title">🚀 Publish</p>
+
+              <div style="margin-bottom:16px">
+                <label class="toggle-switch" for="editor-status" aria-label="Publish status">
+                  <input type="checkbox" id="editor-status" />
+                  <span class="toggle-track" aria-hidden="true"></span>
+                  <span class="toggle-label">Published</span>
+                </label>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <button id="btn-publish" class="btn btn--primary" style="justify-content:center" aria-label="Save and publish">
+                  ✅ Publish
+                </button>
+                <button id="btn-save-draft" class="btn btn--secondary" style="justify-content:center" aria-label="Save as draft">
+                  💾 Save Draft
+                </button>
+              </div>
+            </div>
+
+            <!-- Post Settings -->
+            <div class="editor-panel">
+              <p class="editor-panel__title">⚙️ Settings</p>
+
+              <div class="form-group">
+                <label class="form-label" for="editor-type">Type</label>
+                <select id="editor-type" class="form-select" aria-label="Post type">
+                  <option value="post">Blog Post</option>
+                  <option value="ctf">CTF Writeup</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="editor-category">Category</label>
+                <select id="editor-category" class="form-select" aria-label="Category">
+                  <option value="general">General</option>
+                  <option value="binary-exploitation">Binary Exploitation</option>
+                  <option value="web">Web Security</option>
+                  <option value="crypto">Cryptography</option>
+                  <option value="reverse">Reverse Engineering</option>
+                  <option value="forensics">Forensics</option>
+                  <option value="osint">OSINT</option>
+                  <option value="network">Network</option>
+                  <option value="malware">Malware</option>
+                  <option value="tools">Tools</option>
+                  <option value="opsec">OPSEC</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="editor-emoji">Emoji Icon</label>
+                <input type="text" id="editor-emoji" class="form-input"
+                       placeholder="📄" maxlength="2" aria-label="Post emoji icon" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="editor-cover-image">🖼️ Cover Image URL</label>
+                <input type="text" id="editor-cover-image" class="form-input"
+                       placeholder="https://... or /assets/..." aria-label="Cover image URL" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">📷 Body Image Helper</label>
+                <input type="file" id="editor-image-file" accept="image/*" style="display:none" />
+                <button type="button" id="btn-insert-image" class="btn btn--secondary" style="width:100%;justify-content:center;gap:6px;padding:8px">
+                  📁 Upload & Insert Image
+                </button>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="editor-date">Date</label>
+                <input type="date" id="editor-date" class="form-input" aria-label="Post date" />
+              </div>
+            </div>
+
+            <!-- CTF-specific fields -->
+            <div class="editor-panel" id="ctf-fields" style="display:none">
+              <p class="editor-panel__title">🏴 CTF Details</p>
+
+              <div class="form-group">
+                <label class="form-label" for="editor-platform">Platform</label>
+                <select id="editor-platform" class="form-select" aria-label="CTF platform">
+                  <option value="">Select Platform</option>
+                  <option value="HackTheBox">HackTheBox</option>
+                  <option value="TryHackMe">TryHackMe</option>
+                  <option value="PicoCTF">PicoCTF</option>
+                  <option value="CTFtime">CTFtime</option>
+                  <option value="DUCTF">DownUnder CTF</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="editor-difficulty">Difficulty</label>
+                <select id="editor-difficulty" class="form-select" aria-label="Challenge difficulty">
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="hard">Hard</option>
+                  <option value="insane">Insane</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="editor-points">Points</label>
+                <input type="number" id="editor-points" class="form-input"
+                       placeholder="0" min="0" aria-label="Challenge points" />
+              </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="editor-panel">
+              <p class="editor-panel__title">🏷️ Tags</p>
+              <div class="tags-input-wrapper" id="tags-wrapper" role="group" aria-label="Post tags">
+                <input type="text" id="tags-input" class="tags-input"
+                       placeholder="Add tag, press Enter…"
+                       aria-label="Add tag" maxlength="30" />
+              </div>
+              <p class="form-hint">Press Enter or comma to add. Max 10 tags.</p>
+            </div>
+
+          </aside>
+        </div>
+      </section>
+
+      <!-- ── Settings & Backup Panel ──────────────────────── -->
+      <section class="admin-panel" id="panel-connections" aria-label="System connections">
+
+        <div style="margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px">
+          <div>
+            <h2 style="font-size:1.1rem;font-weight:800;margin-bottom:4px">🔌 System Connections</h2>
+            <p style="color:var(--text-muted);font-size:0.85rem">Monitor API server, MongoDB, and storage mode in real time.</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn--secondary btn--sm" id="btn-test-conn">🧪 Test Connection</button>
+            <button class="btn btn--secondary btn--sm" onclick="syncLocalPostsToMongoDB()" style="color:var(--accent-green);border-color:var(--accent-green)">🍃 Sync Local to MongoDB</button>
+            <button class="btn btn--primary btn--sm" id="btn-refresh-conn">↻ Refresh</button>
+          </div>
+        </div>
+
+        <!-- Status overview cards -->
+        <div class="conn-overview" id="conn-grid">
+          <div class="conn-card">
+            <div class="conn-card__header">
+              <span class="conn-card__icon">🌐</span>
+              <h3>REST API</h3>
+              <span class="conn-badge conn-badge--checking" id="conn-api-badge">Checking…</span>
+            </div>
+            <div class="conn-card__body" id="conn-api-detail">
+              <p class="conn-hint">Loading…</p>
+            </div>
+          </div>
+
+          <div class="conn-card">
+            <div class="conn-card__header">
+              <span class="conn-card__icon">🍃</span>
+              <h3>MongoDB</h3>
+              <span class="conn-badge conn-badge--checking" id="conn-db-badge">Checking…</span>
+            </div>
+            <div class="conn-card__body" id="conn-db-detail">
+              <p class="conn-hint">Loading…</p>
+            </div>
+          </div>
+
+          <div class="conn-card">
+            <div class="conn-card__header">
+              <span class="conn-card__icon">💾</span>
+              <h3>Storage Mode</h3>
+              <span class="conn-badge conn-badge--checking" id="conn-mode-badge">—</span>
+            </div>
+            <div class="conn-card__body" id="conn-env-detail">
+              <p class="conn-hint">Loading…</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- API URL config -->
+        <div class="card" style="margin-top:24px;max-width:640px">
+          <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:12px">⚙️ API Configuration</h3>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px">
+            Current endpoint: <code id="conn-api-url" style="color:var(--accent-cyan);font-size:0.78rem">—</code>
+          </p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <input type="url" id="conn-api-input" class="form-input" style="flex:1;min-width:200px"
+                   placeholder="https://your-api.onrender.com" aria-label="API base URL" />
+            <button class="btn btn--primary btn--sm" id="btn-save-api-url">Save URL</button>
+          </div>
+          <p class="form-hint" style="margin-top:8px">On Vercel, use same-origin <code>/api</code> or your Render backend URL.</p>
+        </div>
+
+        <!-- Connection log -->
+        <div style="margin-top:24px">
+          <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:12px">📋 Connection Log</h3>
+          <div class="conn-log" id="conn-log" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="admin-panel" id="panel-settings" aria-label="Settings and backup">
+
+        <div style="margin-bottom:32px">
+          <h2 style="font-size:1.1rem;font-weight:800;margin-bottom:4px">Settings & Backup</h2>
+          <p style="color:var(--text-muted);font-size:0.85rem">Manage your blog data and account security.</p>
+        </div>
+
+        <!-- Backup & Restore -->
+        <div style="margin-bottom:32px">
+          <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:16px">💾 Data Backup</h3>
+          <div class="backup-grid">
+            <div class="backup-card">
+              <div class="backup-card__icon">📤</div>
+              <h3>Export Posts</h3>
+              <p>Download all your posts as a JSON file for safekeeping.</p>
+              <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--text-muted);margin-bottom:16px" id="backup-stats"></p>
+              <button class="btn btn--primary" id="btn-export" aria-label="Export posts">📥 Download Backup</button>
+            </div>
+
+            <div class="backup-card">
+              <div class="backup-card__icon">📥</div>
+              <h3>Import Posts</h3>
+              <p>Restore posts from a previously exported JSON backup file.</p>
+              <div class="file-drop-zone" id="import-zone" role="button" tabindex="0"
+                   aria-label="Drop JSON backup file here or click to browse">
+                <div class="file-drop-zone__icon">📂</div>
+                Drop JSON file here or click to browse
+              </div>
+              <input type="file" id="import-file" accept=".json" style="display:none" aria-label="Import backup file" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Change Password -->
+        <div style="margin-bottom:32px">
+          <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:16px">🔑 Change Password</h3>
+          <div class="card" style="max-width:480px">
+            <form id="change-pw-form" aria-label="Change password">
+              <div class="form-group">
+                <label class="form-label" for="new-password">New Password</label>
+                <input type="password" id="new-password" class="form-input"
+                       placeholder="Enter new password…" minlength="8"
+                       autocomplete="new-password" aria-label="New password" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" class="form-input"
+                       placeholder="Repeat new password…" minlength="8"
+                       autocomplete="new-password" aria-label="Confirm password" />
+              </div>
+              <button type="submit" class="btn btn--primary" aria-label="Change password">🔐 Change Password</button>
+            </form>
+
+            <!-- Hash output for copy-paste into admin-auth.js -->
+            <div class="hash-result" id="hash-result-wrapper" style="display:none;margin-top:20px;padding:14px;background:var(--bg-primary);border:1px solid var(--border-glow);border-radius:var(--radius-md)">
+              <p style="font-family:var(--font-mono);font-size:0.75rem;color:var(--accent-green);margin-bottom:8px">✅ Password Updated!</p>
+              <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:4px">Your password has been changed and is stored securely in your browser.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div>
+          <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:16px;color:var(--accent-red)">⚠️ Danger Zone</h3>
+          <div class="card" style="border-color:rgba(255,71,87,0.2);background:rgba(255,71,87,0.03)">
+            <h4 style="font-size:0.9rem;font-weight:700;margin-bottom:8px">Delete All Posts</h4>
+            <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:16px">Permanently delete all posts. This cannot be undone. Export a backup first.</p>
+            <button class="btn btn--danger" id="btn-delete-all" onclick="confirmDeleteAll()" aria-label="Delete all posts">🗑 Delete All Posts</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/admin-auth.js"></script>
+<script src="../assets/js/admin-connections.js"></script>
+<script src="../assets/js/admin-dash.js"></script>
+
+<script>
+// Extra dashboard helpers
+
+// Update datetime
+function updateDatetime() {
+  const el = document.getElementById('dash-datetime');
+  if (el) {
+    el.textContent = new Date().toLocaleString('en-US', {
+      weekday:'long', year:'numeric', month:'long', day:'numeric',
+      hour:'2-digit', minute:'2-digit'
+    });
+  }
+}
+updateDatetime();
+setInterval(updateDatetime, 60000);
+
+// Confirm delete all
+function confirmDeleteAll() {
+  Modal.show(
+    '⚠️ Delete ALL Posts',
+    'This will permanently delete ALL posts and cannot be undone. Are you absolutely sure?',
+    [
+      { label: 'Cancel',       class: 'btn--secondary', onClick: () => {} },
+      { label: 'Yes, Delete',  class: 'btn--danger',    onClick: async () => {
+        try {
+          if (PostsDB.isApiMode()) {
+            await BlogAPI.deleteAllPosts();
+            await PostsDB.reload(true);
+          } else {
+            localStorage.removeItem('sw_blog_posts');
+            localStorage.removeItem('sw_post_views');
+            await PostsDB.init(true);
+          }
+          renderDashboard();
+          updatePostBadge();
+          Toast.success('All posts deleted.');
+        } catch (err) {
+          Toast.error('Delete failed: ' + err.message);
+        }
+      }},
+    ]
+  );
+}
+
+// Settings panel — update password change to use localStorage
+document.addEventListener('DOMContentLoaded', () => {
+  const changePwForm = document.getElementById('change-pw-form');
+  if (changePwForm) {
+    changePwForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const newPw  = document.getElementById('new-password').value;
+      const confPw = document.getElementById('confirm-password').value;
+
+      if (!newPw || newPw.length < 8) { Toast.error('Password must be at least 8 characters.'); return; }
+      if (newPw !== confPw)            { Toast.error('Passwords do not match.'); return; }
+
+      try {
+        if (typeof BlogAPI !== 'undefined' && BlogAPI.getToken()) {
+          await BlogAPI.changePassword(newPw);
+        } else {
+          const hash = await sha256(newPw);
+          savePasswordHash(hash);
+        }
+
+        const resultWrapper = document.getElementById('hash-result-wrapper');
+        if (resultWrapper) resultWrapper.style.display = 'block';
+
+        document.getElementById('new-password').value     = '';
+        document.getElementById('confirm-password').value = '';
+
+        Toast.success('Password changed successfully!', 4000);
+      } catch (err) {
+        Toast.error(err.message || 'Password change failed');
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>

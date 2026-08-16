@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; connect-src 'self' http://localhost:3001 http://127.0.0.1:3001 https:; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com;">
+  <meta name="description" content="Read post — Sudeepa Wanigarathna Cybersecurity Blog" />
+  <meta name="author" content="Sudeepa Wanigarathna" />
+  <meta property="og:type" content="article" />
+  <title>Post — CerberusMrXi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js" defer></script>
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/blog.css" />
+</head>
+<body>
+
+<nav class="nav" id="main-nav" aria-label="Main navigation">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="CerberusMrXi home">
+      <span class="nav__logo-icon">CX</span>
+      <span>Cerberus<span>MrXi</span></span>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html" class="nav__link">Blog</a></li>
+      <li><a href="ctf.html" class="nav__link">CTF</a></li>
+      <li><a href="about.html" class="nav__link">About</a></li>
+    </ul>
+    <div class="nav__actions">
+      <button type="button" class="btn btn--secondary btn--sm" id="toc-toggle" aria-controls="post-toc">Contents</button>
+    </div>
+    <button class="nav__hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav__mobile" id="nav-mobile">
+  <a href="index.html" class="nav__link">Blog</a>
+  <a href="ctf.html" class="nav__link">CTF</a>
+  <a href="about.html" class="nav__link">About</a>
+</div>
+
+<main class="post-page" id="main-content">
+  <div class="container">
+    <header class="post-header">
+      <a href="index.html" class="post-header__back" id="back-link">← Blog</a>
+
+      <div class="post-header__meta">
+        <div id="post-tags" class="post-header__tags"></div>
+        <span class="post-header__date" id="post-date"></span>
+        <span class="post-header__readtime" id="post-readtime"></span>
+        <span class="post-header__readtime" id="post-views"></span>
+      </div>
+
+      <div id="post-cover-banner" class="post-cover-banner" hidden></div>
+      <h1 class="post-header__title" id="post-title">Loading…</h1>
+      <p class="post-header__desc" id="post-desc"></p>
+      <div id="ctf-meta" class="ctf-meta" hidden></div>
+      <div class="post-header__divider" aria-hidden="true"></div>
+    </header>
+
+    <div class="post-layout">
+      <article class="post-content" id="post-content" aria-label="Post content">
+        <div class="post-loading">
+          <span class="spinner"></span> Loading post…
+        </div>
+      </article>
+
+      <aside class="post-toc" id="post-toc" aria-label="Table of contents">
+        <p class="post-toc__title">On this page</p>
+        <ul class="post-toc__list" id="toc-list" role="list"></ul>
+      </aside>
+    </div>
+
+    <footer class="post-end">
+      <div class="post-footer-meta">
+        <span class="post-footer-meta__label">Tags</span>
+        <div id="post-footer-tags" class="post-footer-meta__tags"></div>
+        <div class="post-footer-meta__share">
+          <span class="post-footer-meta__label">Share</span>
+          <a id="share-twitter" class="btn btn--secondary btn--sm" target="_blank" rel="noopener noreferrer">X</a>
+          <a id="share-linkedin" class="btn btn--secondary btn--sm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <button type="button" id="share-copy" class="btn btn--secondary btn--sm">Copy link</button>
+        </div>
+      </div>
+
+      <nav class="post-nav" aria-label="Adjacent posts">
+        <a id="post-prev" class="post-nav__link post-nav__link--prev" hidden></a>
+        <a id="post-next" class="post-nav__link post-nav__link--next" hidden></a>
+      </nav>
+
+      <section id="related-posts" class="related" hidden></section>
+    </footer>
+  </div>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__bottom footer__bottom--solo">
+      <p class="footer__copy">© 2024–2026 Sudeepa Wanigarathna · <a href="index.html">CerberusMrXi</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/post.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "cerberusmrxi-blog",
+  "version": "1.0.0",
+  "description": "CerberusMrXi — Cybersecurity Blog & Research Platform",
+  "private": true,
+  "scripts": {
+    "generate:posts": "node scripts/generate-posts.js",
+    "generate:feed": "node scripts/generate-feed.js",
+    "generate": "node scripts/generate-posts.js && node scripts/generate-feed.js",
+    "backend:dev": "cd backend && npm run dev",
+    "backend:start": "cd backend && npm start",
+    "backend:seed": "cd backend && npm run seed"
+  },
+  "author": "Sudeepa Wanigarathna (CerberusMrXi)",
+  "license": "MIT"
+}

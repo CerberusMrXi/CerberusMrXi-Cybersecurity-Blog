@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; connect-src 'self' http://localhost:3001 http://127.0.0.1:3001 https:; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com;">
+  <meta name="description" content="Sudeepa Wanigarathna — Offensive security research, exploit notes, and CTF writeups from Serendibware." />
+  <meta name="keywords" content="cybersecurity, ethical hacking, CTF writeups, exploit development, penetration testing, Sudeepa Wanigarathna" />
+  <meta name="author" content="Sudeepa Wanigarathna" />
+  <meta property="og:title" content="CerberusMrXi — Cybersecurity Blog" />
+  <meta property="og:description" content="Offensive security research, exploit notes, and CTF writeups." />
+  <meta property="og:type" content="website" />
+  <link rel="alternate" type="application/rss+xml" title="CerberusMrXi RSS" href="feed.xml" />
+  <title>CerberusMrXi — Cybersecurity Blog</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/blog.css" />
+</head>
+<body>
+
+<nav class="nav" id="main-nav" aria-label="Main navigation">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="CerberusMrXi home">
+      <span class="nav__logo-icon">CX</span>
+      <span>Cerberus<span>MrXi</span></span>
+    </a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="index.html" class="nav__link nav__link--active">Blog</a></li>
+      <li><a href="ctf.html" class="nav__link">CTF</a></li>
+      <li><a href="about.html" class="nav__link">About</a></li>
+    </ul>
+
+    <div class="nav__actions">
+      <a href="feed.xml" class="btn btn--secondary btn--sm" title="RSS feed">RSS</a>
+    </div>
+
+    <button class="nav__hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav__mobile" id="nav-mobile" role="navigation" aria-label="Mobile navigation">
+  <a href="index.html" class="nav__link">Blog</a>
+  <a href="ctf.html" class="nav__link">CTF</a>
+  <a href="about.html" class="nav__link">About</a>
+  <a href="feed.xml" class="nav__link">RSS</a>
+</div>
+
+<section class="hero" id="hero" aria-label="Hero">
+  <div class="hero__bg"></div>
+  <div class="hero__grid-lines" aria-hidden="true"></div>
+  <canvas id="matrix-canvas" class="hero__matrix" aria-hidden="true"></canvas>
+
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <p class="hero__brand">Cerberus<span>MrXi</span></p>
+      <h1 class="hero__title">
+        Offensive security,<br />written in public.
+      </h1>
+      <p class="hero__desc">
+        Exploit notes, CVE research, and CTF methodology from
+        <span id="typing-text" class="hero__typing"></span><span class="cursor" aria-hidden="true"></span>
+      </p>
+      <div class="hero__actions">
+        <a href="#posts" class="btn btn--primary btn--lg">Read the blog</a>
+        <a href="ctf.html" class="btn btn--secondary btn--lg">CTF writeups</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="signal-strip" aria-label="Blog counts">
+  <div class="container signal-strip__inner">
+    <div class="signal-strip__item">
+      <span class="signal-strip__num" id="stat-posts">0</span>
+      <span class="signal-strip__label">Research posts</span>
+    </div>
+    <div class="signal-strip__item">
+      <span class="signal-strip__num" id="stat-ctfs">0</span>
+      <span class="signal-strip__label">CTF writeups</span>
+    </div>
+    <div class="signal-strip__item signal-strip__item--muted">
+      <span class="signal-strip__label">Serendibware · Sri Lanka</span>
+    </div>
+  </div>
+</div>
+
+<main id="posts" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Latest posts</h2>
+      <p class="section-subtitle">Vulnerability research, exploit tooling, and security notes.</p>
+    </div>
+
+    <div class="filter-bar" role="search" aria-label="Search and filter posts">
+      <div class="search-box">
+        <span class="search-box__icon" aria-hidden="true">/</span>
+        <input type="search" id="search-input" class="search-box__input"
+               placeholder="Search posts, tags…" aria-label="Search posts" autocomplete="off" />
+      </div>
+      <div class="filter-tags" id="filter-tags" role="group" aria-label="Category filters"></div>
+    </div>
+
+    <div class="post-grid" id="post-grid" role="feed" aria-label="Blog posts"></div>
+  </div>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo footer__logo">
+          <span class="nav__logo-icon">CX</span>
+          <span>Cerberus<span>MrXi</span></span>
+        </a>
+        <p>CEO &amp; Founder of Serendibware. Cybersecurity engineer documenting offensive research and CTF craft.</p>
+      </div>
+      <div>
+        <h3 class="footer__heading">Navigate</h3>
+        <ul class="footer__links" role="list">
+          <li><a href="index.html" class="footer__link">Blog</a></li>
+          <li><a href="ctf.html" class="footer__link">CTF Writeups</a></li>
+          <li><a href="about.html" class="footer__link">About</a></li>
+          <li><a href="feed.xml" class="footer__link">RSS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__heading">Connect</h3>
+        <ul class="footer__links" role="list">
+          <li><a href="https://github.com/CerberusMrXi" class="footer__link" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://x.com/SudeepaWanigar1" class="footer__link" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
+          <li><a href="https://tryhackme.com/p/CerberusMrXi" class="footer__link" target="_blank" rel="noopener noreferrer">TryHackMe</a></li>
+          <li><a href="mailto:security@serendibware.com" class="footer__link">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2024–2026 Sudeepa Wanigarathna · Hack The Planet</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/blog.js"></script>
+</body>
+</html>

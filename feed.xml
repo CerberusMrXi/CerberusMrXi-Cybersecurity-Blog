@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CerberusMrXi</title>
+    <link>https://cerberusmrxi.github.io/</link>
+    <description>Offensive security research, exploit notes, and CTF writeups by Sudeepa Wanigarathna.</description>
+    <language>en-us</language>
+    <atom:link href="https://cerberusmrxi.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title><![CDATA[React2Shell: Hunting RCE in Next.js Server Components]]></title>
+      <link>https://cerberusmrxi.github.io/post.html?id=post-005</link>
+      <guid isPermaLink="false">post-005</guid>
+      <pubDate>Wed, 12 Mar 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[How CVE-class flaws in React Server Components / Next.js can lead to RCE — and how React2Shell helps defenders find exposed surfaces.]]></description>
+      <category>Blog</category>
+    </item>
+    <item>
+      <title><![CDATA[TryHackMe — Introductory Linux Privilege Escalation Notes]]></title>
+      <link>https://cerberusmrxi.github.io/post.html?id=post-006</link>
+      <guid isPermaLink="false">post-006</guid>
+      <pubDate>Sat, 18 Jan 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[A practical writeup-style checklist for Linux privilege escalation: enumeration, SUID, cron, sudo, and kernel pitfalls.]]></description>
+      <category>CTF</category>
+    </item>
+    <item>
+      <title><![CDATA[Exploiting Buffer Overflows: A Deep Dive into Stack Smashing]]></title>
+      <link>https://cerberusmrxi.github.io/post.html?id=post-001</link>
+      <guid isPermaLink="false">post-001</guid>
+      <pubDate>Sun, 15 Dec 2024 00:00:00 GMT</pubDate>
+      <description><![CDATA[A comprehensive guide to understanding and exploiting classic stack-based buffer overflow vulnerabilities in x86/x64 Linux binaries.]]></description>
+      <category>Blog</category>
+    </item>
+    <item>
+      <title><![CDATA[Web Cache Poisoning to RCE: HackTheBox — Cache Machine]]></title>
+      <link>https://cerberusmrxi.github.io/post.html?id=post-002</link>
+      <guid isPermaLink="false">post-002</guid>
+      <pubDate>Wed, 20 Nov 2024 00:00:00 GMT</pubDate>
+      <description><![CDATA[Full walkthrough of the Cache machine from HackTheBox involving web cache poisoning, SSRF, and privilege escalation via Docker socket abuse.]]></description>
+      <category>CTF</category>
+    </item>
+    <item>
+      <title><![CDATA[Building a Custom C2 Framework in Go: From Scratch]]></title>
+      <link>https://cerberusmrxi.github.io/post.html?id=post-003</link>
+      <guid isPermaLink="false">post-003</guid>
+      <pubDate>Sat, 05 Oct 2024 00:00:00 GMT</pubDate>
+      <description><![CDATA[Learn how to build a basic Command & Control framework using Go for the implant and Python for the operator console. Educational purposes only.]]></description>
+      <category>Blog</category>
+    </item>
+    <item>
+      <title><![CDATA[PicoCTF 2024 — Crypto Challenge: RSA Unpadded Oracle]]></title>
+      <link>https://cerberusmrxi.github.io/post.html?id=post-004</link>
+      <guid isPermaLink="false">post-004</guid>
+      <pubDate>Tue, 10 Sep 2024 00:00:00 GMT</pubDate>
+      <description><![CDATA[Solving a tricky RSA challenge using an unpadded message oracle (blinding) attack to recover plaintext without the private key.]]></description>
+      <category>CTF</category>
+    </item>
+  </channel>
+</rss>

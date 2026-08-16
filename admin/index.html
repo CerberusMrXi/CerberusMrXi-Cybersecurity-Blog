@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Strict CSP for admin pages -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; connect-src 'self' http://localhost:3001 http://127.0.0.1:3001 https:; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com;">
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin Login — CerberusMrXi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/admin.css" />
+</head>
+<body>
+
+<!-- Matrix canvas -->
+<canvas id="matrix-canvas" style="position:fixed;inset:0;width:100%;height:100%;opacity:0.12;pointer-events:none;z-index:0"></canvas>
+
+<!-- ── Login Card ────────────────────────────────────────────── -->
+<main class="login-page" id="main-content">
+
+  <div class="login-card" role="main" aria-label="Admin login">
+
+    <div class="login-logo" aria-hidden="false">
+      <div class="login-logo__icon">⚡</div>
+      <h1>Admin Panel</h1>
+      <p>CERBERUSMRXI // SECURE ACCESS</p>
+    </div>
+
+    <!-- First-run setup notice -->
+    <div id="setup-notice" style="display:none;margin-bottom:20px;padding:14px 16px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:var(--radius-md);font-family:var(--font-mono);font-size:0.82rem;color:var(--accent-cyan)">
+      🔧 <strong>First-Time Setup</strong> — Create your admin password below.
+    </div>
+
+    <!-- First-run setup form -->
+    <form id="setup-form" style="display:none" aria-label="Create password">
+      <div class="form-group">
+        <label class="form-label" for="setup-password">🔑 Create Password</label>
+        <div class="input-wrapper">
+          <input type="password" id="setup-password" class="form-input"
+                 placeholder="Choose a strong password…"
+                 minlength="8" autocomplete="new-password" required />
+          <span class="input-toggle-pw" id="setup-pw-toggle" title="Show/hide password" aria-label="Toggle password visibility">👁</span>
+        </div>
+        <p class="form-hint">Min. 8 characters. Use letters, numbers & symbols.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="setup-confirm">🔒 Confirm Password</label>
+        <input type="password" id="setup-confirm" class="form-input"
+               placeholder="Repeat your password…"
+               minlength="8" autocomplete="new-password" required />
+        <p id="setup-error" class="form-error" style="display:none">⚠ Passwords do not match.</p>
+      </div>
+
+      <button type="submit" id="setup-btn" class="btn btn--primary" style="width:100%;justify-content:center;padding:13px">
+        ⚡ Create Password & Enter
+      </button>
+    </form>
+
+    <!-- Regular login form -->
+    <form id="login-form" style="display:none" autocomplete="off" aria-label="Admin login">
+      <!-- Lockout message -->
+      <div class="lockout-msg" id="lockout-msg" role="alert" aria-live="polite"></div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">🔑 Password</label>
+        <div class="input-wrapper">
+          <input type="password" id="password" class="form-input"
+                 placeholder="Enter admin password…"
+                 autocomplete="current-password" required />
+          <span class="input-toggle-pw" id="pw-toggle" title="Show/hide password" aria-label="Toggle password visibility">👁</span>
+        </div>
+        <p id="login-error" class="form-error" style="display:none"></p>
+        <p class="attempt-counter" id="attempts-counter" aria-live="polite"></p>
+      </div>
+
+      <button type="submit" id="login-btn" class="btn btn--primary" style="width:100%;justify-content:center;padding:13px">
+        ⚡ Access Terminal
+      </button>
+    </form>
+
+    <!-- Loading state -->
+    <div id="login-loading" style="display:none;text-align:center;padding:20px">
+      <span class="spinner" style="width:32px;height:32px;border-width:3px"></span>
+      <p style="margin-top:16px;font-family:var(--font-mono);font-size:0.85rem;color:var(--text-muted)">Authenticating…</p>
+    </div>
+
+    <!-- Footer -->
+    <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--border-subtle);text-align:center">
+      <a href="../index.html" style="font-family:var(--font-mono);font-size:0.78rem;color:var(--text-muted)">
+        ← Back to Blog
+      </a>
+    </div>
+
+    <!-- Security note -->
+    <p style="margin-top:16px;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);text-align:center;line-height:1.6">
+      🔒 SHA-256 hashed · Brute-force protected · Session-based auth
+    </p>
+  </div>
+
+</main>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/admin-auth.js"></script>
+</body>
+</html>
